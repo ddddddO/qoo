@@ -27,6 +27,12 @@ impl Query {
         }
     }
 
+    fn insert(table: String) -> Query {
+        Query {
+            q: format!("{} {}", "insert into", table)
+        }
+    }
+
     fn from(self, table: String) -> Query {
         Query {
             q: format!("{} from {}", self.q , table),
