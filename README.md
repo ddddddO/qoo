@@ -1,0 +1,2 @@
+# qoo
+Pronunciation is Kuu. 
