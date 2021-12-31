@@ -1,5 +1,5 @@
 fn main() {
-    let query = Query::select("test".to_string());
+    let query = Query::select("col1".to_string()).from("table1".to_string());
     println!("{}", query.to_string());
 }
 
@@ -8,9 +8,15 @@ struct Query {
 }
 
 impl Query {
-    fn select(table: String) -> Query {
-        Query{
-            q: format!("{} {}", "select", table),
+    fn select(column: String) -> Query {
+        Query {
+            q: format!("{} {}", "select", column),
+        }
+    }
+
+    fn from(self, table: String) -> Query {
+        Query {
+            q: format!("{} from {}", self.q , table),
         }
     }
 
