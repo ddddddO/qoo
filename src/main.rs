@@ -7,7 +7,11 @@ fn main() {
 }
 
 trait Base {
-    fn to_sql(self) -> String;
+    fn query(&self) -> String;
+
+    fn to_sql(&self) -> String {
+        self.query()
+    }
 }
 
 struct SelectBuilder {
@@ -29,8 +33,8 @@ impl SelectBuilder {
 }
 
 impl Base for SelectBuilder {
-    fn to_sql(self) -> String {
-        self.q
+    fn query(&self) -> String {
+        self.q.to_string()
     }
 }
 
@@ -53,8 +57,8 @@ impl DeleteBuilder {
 }
 
 impl Base for DeleteBuilder {
-    fn to_sql(self) -> String {
-        self.q
+    fn query(&self) -> String {
+        self.q.to_string()
     }
 }
 
@@ -71,7 +75,7 @@ impl InsertBuilder {
 }
 
 impl Base for InsertBuilder {
-    fn to_sql(self) -> String {
-        self.q
+    fn query(&self) -> String {
+        self.q.to_string()
     }
 }
