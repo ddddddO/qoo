@@ -1,13 +1,13 @@
 fn main() {
     let select_query = SelectBuilder::select("col1".to_string()).from("table1".to_string());
-    println!("{}", select_query.to_string());
+    println!("{}", select_query.to_sql());
 
     let delete_query = DeleteBuilder::delete().from("test1".to_string());
-    println!("{}", delete_query.to_string());
+    println!("{}", delete_query.to_sql());
 }
 
 trait Base {
-    fn to_string(self) -> String;
+    fn to_sql(self) -> String;
 }
 
 struct SelectBuilder {
@@ -29,7 +29,7 @@ impl SelectBuilder {
 }
 
 impl Base for SelectBuilder {
-    fn to_string(self) -> String {
+    fn to_sql(self) -> String {
         self.q
     }
 }
@@ -53,7 +53,7 @@ impl DeleteBuilder {
 }
 
 impl Base for DeleteBuilder {
-    fn to_string(self) -> String {
+    fn to_sql(self) -> String {
         self.q
     }
 }
@@ -71,7 +71,7 @@ impl InsertBuilder {
 }
 
 impl Base for InsertBuilder {
-    fn to_string(self) -> String {
+    fn to_sql(self) -> String {
         self.q
     }
 }
