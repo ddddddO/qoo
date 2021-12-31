@@ -69,3 +69,9 @@ impl InsertBuilder {
         }
     }
 }
+
+impl Base for InsertBuilder {
+    fn to_string(self) -> String {
+        self.q
+    }
+}
