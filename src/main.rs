@@ -1,11 +1,6 @@
-mod base;
-use crate::base::Base;
-
-mod select;
-use crate::select::SelectBuilder;
-
-mod delete;
-use crate::delete::DeleteBuilder;
+use qoo::base::*;
+use qoo::select::*;
+use qoo::delete::*;
 
 fn main() {
     let select_query = SelectBuilder::select("col1").from("table1");
