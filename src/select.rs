@@ -1,4 +1,4 @@
-use crate::base;
+use crate::base::{self, SelectDeleteBase};
 
 pub struct SelectBuilder {
     q: String
@@ -20,6 +20,12 @@ impl SelectBuilder {
             q: format!("{} {}", "select", clms),
         }
     }
+
+    pub fn from(self, table: &str) -> SelectBuilder {
+        SelectBuilder {
+            q: self.from_phrase(table),
+        }
+    }
 }
 
 impl base::Base for SelectBuilder {
@@ -28,10 +34,4 @@ impl base::Base for SelectBuilder {
     }
 }
 
-impl base::SelectDeleteBase for SelectBuilder {
-    fn from(&self, table: &str) -> SelectBuilder {
-        SelectBuilder {
-            q: format!("{} from {}", self.q , table),
-        }
-    }
-}
+impl base::SelectDeleteBase for SelectBuilder {}

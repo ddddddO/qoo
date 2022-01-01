@@ -7,5 +7,7 @@ pub trait Base {
 }
 
 pub trait SelectDeleteBase : Base {
-    fn from(&self, table: &str) -> Self;
+    fn from_phrase(&self, table: &str) -> String {
+        format!("{} from {}", self.query() , table)
+    }
 }
