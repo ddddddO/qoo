@@ -1,4 +1,4 @@
-use crate::base::{Base, SelectDeleteBase};
+use crate::base::{Base, SelectDeleteBase, SelectUpdateDeleteBase};
 
 pub struct DeleteBuilder {
     q: String
@@ -29,3 +29,4 @@ impl Base for DeleteBuilder {
 }
 
 impl SelectDeleteBase for DeleteBuilder {}
+impl SelectUpdateDeleteBase for DeleteBuilder {}

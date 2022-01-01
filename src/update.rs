@@ -1,4 +1,4 @@
-use crate::base::{Base};
+use crate::base::{Base, SelectUpdateDeleteBase};
 
 pub struct UpdateBuilder {
     cnt: u32,
@@ -35,3 +35,5 @@ impl Base for UpdateBuilder {
         self.q.to_string()
     }
 }
+
+impl SelectUpdateDeleteBase for UpdateBuilder {}

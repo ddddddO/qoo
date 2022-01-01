@@ -1,4 +1,4 @@
-use crate::base::{Base, SelectDeleteBase, SelectInsertBase};
+use crate::base::{Base, SelectDeleteBase, SelectInsertBase, SelectUpdateDeleteBase};
 
 pub struct SelectBuilder {
     q: String
@@ -65,3 +65,5 @@ impl SelectInsertBase for SelectBuilder {
         clms
     }
 }
+
+impl SelectUpdateDeleteBase for SelectBuilder {}
