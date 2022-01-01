@@ -1,10 +1,27 @@
 use crate::base::{Base, SelectDeleteBase, SelectInsertBase, SelectUpdateDeleteBase};
 
+/// Structure for select statement.
 pub struct SelectBuilder {
     q: String
 }
 
 impl SelectBuilder {
+    /// Assemble the select statement.
+    ///
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let select_query =
+    ///     SelectBuilder::select(["col0", "col1"].to_vec())
+    ///         .columns(["col2", "col3"].to_vec())
+    ///         .from("table1")
+    ///         .wheres("id >= 100");
+    /// assert_eq!(
+    ///     select_query.to_sql(),
+    ///     "select col0, col1, col2, col3 from table1 where id >= 100".to_string()
+    /// );
+    /// ```
     pub fn select(columns: Vec<&str>) -> Self {
         let mut clms: String = "".to_string();
         let cs = &columns;

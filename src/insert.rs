@@ -1,11 +1,28 @@
 use crate::base::{Base, SelectInsertBase};
 
+/// Structure for insert statement.
 pub struct InsertBuilder {
     cnt: u32,
     q: String
 }
 
 impl InsertBuilder {
+    /// Assemble the insert statement.
+    ///
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let insert_query =
+    ///     InsertBuilder::insert("test1")
+    ///         .columns(["col0", "col1"].to_vec())
+    ///         .value("'xxx'")
+    ///         .value("'yyy'");
+    /// assert_eq!(
+    ///     insert_query.to_sql(),
+    ///     "insert into test1 (col0, col1) values ('xxx', 'yyy')"
+    /// );
+    /// ```
     pub fn insert(table: &str) -> InsertBuilder {
         InsertBuilder {
             cnt: 0,
