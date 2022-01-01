@@ -5,7 +5,6 @@ use qoo::update::*;
 use qoo::delete::*;
 
 fn main() {
-    // TODO: .to_vec()無くしたい
     let select_query =
         SelectBuilder::select(["col0", "col1"].to_vec())
             .columns(["col2", "col3"].to_vec())
