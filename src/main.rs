@@ -1,8 +1,8 @@
 fn main() {
-    let select_query = SelectBuilder::select("col1".to_string()).from("table1".to_string());
+    let select_query = SelectBuilder::select("col1").from("table1");
     println!("{}", select_query.to_sql());
 
-    let delete_query = DeleteBuilder::delete().from("test1".to_string());
+    let delete_query = DeleteBuilder::delete().from("test1");
     println!("{}", delete_query.to_sql());
 }
 
@@ -19,13 +19,13 @@ struct SelectBuilder {
 }
 
 impl SelectBuilder {
-    fn select(column: String) -> SelectBuilder {
+    fn select(column: &str) -> SelectBuilder {
         SelectBuilder {
             q: format!("{} {}", "select", column),
         }
     }
 
-    fn from(self, table: String) -> SelectBuilder {
+    fn from(self, table: &str) -> SelectBuilder {
         SelectBuilder {
             q: format!("{} from {}", self.q , table),
         }
@@ -49,7 +49,7 @@ impl DeleteBuilder {
         }
     }
 
-    fn from(self, table: String) -> DeleteBuilder {
+    fn from(self, table: &str) -> DeleteBuilder {
         DeleteBuilder {
             q: format!("{} from {}", self.q , table),
         }
@@ -67,7 +67,7 @@ struct InsertBuilder {
 }
 
 impl InsertBuilder {
-    fn insert(table: String) -> InsertBuilder {
+    fn insert(table: &str) -> InsertBuilder {
         InsertBuilder {
             q: format!("{} {}", "insert into", table)
         }
