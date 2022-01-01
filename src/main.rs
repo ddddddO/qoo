@@ -1,17 +1,12 @@
+mod base;
+use crate::base::Base;
+
 fn main() {
     let select_query = SelectBuilder::select("col1").from("table1");
     println!("{}", select_query.to_sql());
 
     let delete_query = DeleteBuilder::delete().from("test1");
     println!("{}", delete_query.to_sql());
-}
-
-trait Base {
-    fn query(&self) -> String;
-
-    fn to_sql(&self) -> String {
-        self.query()
-    }
 }
 
 struct SelectBuilder {
@@ -32,7 +27,7 @@ impl SelectBuilder {
     }
 }
 
-impl Base for SelectBuilder {
+impl base::Base for SelectBuilder {
     fn query(&self) -> String {
         self.q.to_string()
     }
@@ -56,7 +51,7 @@ impl DeleteBuilder {
     }
 }
 
-impl Base for DeleteBuilder {
+impl base::Base for DeleteBuilder {
     fn query(&self) -> String {
         self.q.to_string()
     }
@@ -74,7 +69,7 @@ impl InsertBuilder {
     }
 }
 
-impl Base for InsertBuilder {
+impl base::Base for InsertBuilder {
     fn query(&self) -> String {
         self.q.to_string()
     }
