@@ -5,7 +5,7 @@ pub struct SelectBuilder {
 }
 
 impl SelectBuilder {
-    pub fn select(columns: Vec<&str>) -> SelectBuilder {
+    pub fn select(columns: Vec<&str>) -> Self {
         let mut clms: String = "".to_string();
         let cs = &columns;
         for c in cs {
@@ -21,16 +21,14 @@ impl SelectBuilder {
         }
     }
 
-    pub fn from(self, table: &str) -> SelectBuilder {
-        SelectBuilder {
-            q: self.from_phrase(table),
-        }
+    pub fn from(mut self, table: &str) -> Self {
+        self.q = self.from_phrase(table);
+        self
     }
 
-    pub fn wheres(self, where_str: &str) -> SelectBuilder {
-        SelectBuilder {
-            q: self.where_phrase(where_str),
-        }
+    pub fn wheres(mut self, where_str: &str) -> Self {
+        self.q = self.where_phrase(where_str);
+        self
     }
 }
 

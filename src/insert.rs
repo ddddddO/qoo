@@ -11,10 +11,9 @@ impl InsertBuilder {
         }
     }
 
-    pub fn wheres(self, where_str: &str) -> InsertBuilder {
-        InsertBuilder {
-            q: self.where_phrase(where_str),
-        }
+    pub fn wheres(self, where_str: &str) -> Self {
+        self.q = self.where_phrase(where_str);
+        self
     }
 }
 

@@ -11,16 +11,14 @@ impl DeleteBuilder {
         }
     }
 
-    pub fn from(self, table: &str) -> DeleteBuilder {
-        DeleteBuilder {
-            q: self.from_phrase(table),
-        }
+    pub fn from(mut self, table: &str) -> Self {
+        self.q = self.from_phrase(table);
+        self
     }
 
-    pub fn wheres(self, where_str: &str) -> DeleteBuilder {
-        DeleteBuilder {
-            q: self.where_phrase(where_str),
-        }
+    pub fn wheres(mut self, where_str: &str) -> Self {
+        self.q = self.where_phrase(where_str);
+        self
     }
 }
 
