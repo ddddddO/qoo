@@ -5,9 +5,19 @@ pub struct SelectBuilder {
 }
 
 impl SelectBuilder {
-    pub fn select(column: &str) -> SelectBuilder {
+    pub fn select(columns: Vec<&str>) -> SelectBuilder {
+        let mut clms: String = "".to_string();
+        let cs = &columns;
+        for c in cs {
+            if cs.last() == Some(&c) {
+                clms = format!("{}{}", clms, c.to_string());
+                break;
+            }
+            clms = format!("{}{}, ", clms, c.to_string())
+        }
+
         SelectBuilder {
-            q: format!("{} {}", "select", column),
+            q: format!("{} {}", "select", clms),
         }
     }
 
