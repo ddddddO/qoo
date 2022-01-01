@@ -1,4 +1,6 @@
 # qoo
+[![Latest Version](https://img.shields.io/crates/v/qoo.svg)](https://crates.io/crates/qoo) [![Docs](https://docs.rs/qoo/badge.svg)](https://docs.rs/qoo)
+
 Query Object Oriented.<br>
 Pronunciation is Kuu.
 
