@@ -1,4 +1,4 @@
-use crate::base::{self, SelectDeleteBase};
+use crate::base::{Base, SelectDeleteBase};
 
 pub struct SelectBuilder {
     q: String
@@ -26,12 +26,18 @@ impl SelectBuilder {
             q: self.from_phrase(table),
         }
     }
+
+    pub fn wheres(self, where_str: &str) -> SelectBuilder {
+        SelectBuilder {
+            q: self.where_phrase(where_str),
+        }
+    }
 }
 
-impl base::Base for SelectBuilder {
+impl Base for SelectBuilder {
     fn query(&self) -> String {
         self.q.to_string()
     }
 }
 
-impl base::SelectDeleteBase for SelectBuilder {}
+impl SelectDeleteBase for SelectBuilder {}
