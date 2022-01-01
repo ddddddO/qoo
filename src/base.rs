@@ -5,3 +5,7 @@ pub trait Base {
         self.query()
     }
 }
+
+pub trait SelectDeleteBase : Base {
+    fn from(&self, table: &str) -> Self;
+}

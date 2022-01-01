@@ -20,16 +20,18 @@ impl SelectBuilder {
             q: format!("{} {}", "select", clms),
         }
     }
-
-    pub fn from(self, table: &str) -> SelectBuilder {
-        SelectBuilder {
-            q: format!("{} from {}", self.q , table),
-        }
-    }
 }
 
 impl base::Base for SelectBuilder {
     fn query(&self) -> String {
         self.q.to_string()
+    }
+}
+
+impl base::SelectDeleteBase for SelectBuilder {
+    fn from(&self, table: &str) -> SelectBuilder {
+        SelectBuilder {
+            q: format!("{} from {}", self.q , table),
+        }
     }
 }
