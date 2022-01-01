@@ -16,3 +16,7 @@ pub trait SelectDeleteBase : Base {
         format!("{} from {}", self.query() , table)
     }
 }
+
+pub trait SelectInsertBase : Base {
+    fn clmns(&self, cs: Vec<&str>) -> String;
+}

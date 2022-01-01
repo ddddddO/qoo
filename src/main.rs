@@ -1,17 +1,27 @@
 use qoo::base::*;
 use qoo::select::*;
+use qoo::insert::*;
 use qoo::update::*;
 use qoo::delete::*;
 
 fn main() {
     // TODO: .to_vec()無くしたい
     let select_query =
-        SelectBuilder::select(["col0", "col1", "col2"].to_vec())
+        SelectBuilder::select(["col0", "col1"].to_vec())
+            .columns(["col2", "col3"].to_vec())
             .from("table1")
             .wheres("id >= 100");
     assert_eq!(
         select_query.to_sql(),
-        "select col0, col1, col2 from table1 where id >= 100".to_string()
+        "select col0, col1, col2, col3 from table1 where id >= 100".to_string()
+    );
+
+    let insert_query =
+        InsertBuilder::insert("test1")
+            .columns(["col0", "col1"].to_vec());
+    assert_eq!(
+        insert_query.to_sql(),
+        "insert into test1 (col0, col1) "
     );
 
     let update_query =

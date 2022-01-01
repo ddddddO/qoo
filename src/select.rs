@@ -1,4 +1,4 @@
-use crate::base::{Base, SelectDeleteBase};
+use crate::base::{Base, SelectDeleteBase, SelectInsertBase};
 
 pub struct SelectBuilder {
     q: String
@@ -21,6 +21,17 @@ impl SelectBuilder {
         }
     }
 
+    pub fn columns(mut self, columns: Vec<&str>) -> Self {
+        let exists_prev_clmn = self.q.split(" ").count();
+        if exists_prev_clmn >= 2 {
+            self.q = format!("{},", self.q);
+        }
+
+        let clms = self.clmns(columns);
+        self.q = format!("{} {}", self.q, clms);
+        self
+    }
+
     pub fn from(mut self, table: &str) -> Self {
         self.q = self.from_phrase(table);
         self
@@ -39,3 +50,18 @@ impl Base for SelectBuilder {
 }
 
 impl SelectDeleteBase for SelectBuilder {}
+
+impl SelectInsertBase for SelectBuilder {
+    fn clmns(&self, columns: Vec<&str>) -> String {
+        let mut clms: String = "".to_string();
+        let cs = &columns;
+        for c in cs {
+            if cs.last() == Some(&c) {
+                clms = format!("{}{}", clms, c.to_string());
+                break;
+            }
+            clms = format!("{}{}, ", clms, c.to_string())
+        }
+        clms
+    }
+}
