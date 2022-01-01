@@ -26,21 +26,21 @@ fn main() {
     let insert_query =
         InsertBuilder::insert("test1")
             .columns(["col0", "col1"].to_vec())
-            .value("\"xxx\"")
-            .value("\"yyy\"");
+            .value("'xxx'")
+            .value("'yyy'");
     assert_eq!(
         insert_query.to_sql(),
-        "insert into test1 (col0, col1) values (\"xxx\", \"yyy\")"
+        "insert into test1 (col0, col1) values ('xxx', 'yyy')"
     );
 
     let update_query =
         UpdateBuilder::update("test1")
-            .set("col1=\"aaa\"")
-            .set("col2=\"bbb\"")
+            .set("col1='aaa'")
+            .set("col2='bbb'")
             .wheres("id >= 11");
     assert_eq!(
         update_query.to_sql(),
-        "update test1 set col1=\"aaa\", col2=\"bbb\" where id >= 11".to_string()
+        "update test1 set col1='aaa', col2='bbb' where id >= 11".to_string()
     );
 
     let delete_query =
@@ -52,6 +52,7 @@ fn main() {
         "delete from test1 where id >= 100".to_string()
     );
 }
+
 
 ```
 
