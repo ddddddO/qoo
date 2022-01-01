@@ -1,12 +1,14 @@
 use crate::base::{Base, SelectInsertBase};
 
 pub struct InsertBuilder {
+    cnt: u32,
     q: String
 }
 
 impl InsertBuilder {
     pub fn insert(table: &str) -> InsertBuilder {
         InsertBuilder {
+            cnt: 0,
             q: format!("{} {}", "insert into", table)
         }
     }
@@ -17,11 +19,21 @@ impl InsertBuilder {
         self
     }
 
+    pub fn value(mut self, val: &str) -> Self {
+        if self.cnt == 0 {
+            self.q = format!("{}values ({}", self.q, val);
+            self.cnt += self.cnt + 1;
+        } else {
+            self.q = format!("{}, {}", self.q, val);
+            self.cnt += self.cnt + 1;
+        }
+        self
+    }
 }
 
 impl Base for InsertBuilder {
     fn query(&self) -> String {
-        self.q.to_string()
+        format!("{})", self.q.to_string())
     }
 }
 

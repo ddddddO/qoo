@@ -18,10 +18,12 @@ fn main() {
 
     let insert_query =
         InsertBuilder::insert("test1")
-            .columns(["col0", "col1"].to_vec());
+            .columns(["col0", "col1"].to_vec())
+            .value("\"xxx\"")
+            .value("\"yyy\"");
     assert_eq!(
         insert_query.to_sql(),
-        "insert into test1 (col0, col1) "
+        "insert into test1 (col0, col1) values (\"xxx\", \"yyy\")"
     );
 
     let update_query =
