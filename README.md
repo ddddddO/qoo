@@ -1,4 +1,5 @@
 # qoo
+Query Object Oriented.<br>
 Pronunciation is Kuu.
 
 ## inspired by
