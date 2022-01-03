@@ -23,15 +23,7 @@ impl SelectBuilder {
     /// );
     /// ```
     pub fn select(columns: Vec<&str>) -> Self {
-        let mut clms: String = "".to_string();
-        let cs = &columns;
-        for c in cs {
-            if cs.last() == Some(&c) {
-                clms = format!("{}{}", clms, c.to_string());
-                break;
-            }
-            clms = format!("{}{}, ", clms, c.to_string())
-        }
+        let clms = assemble_columns_statemente(columns);
 
         SelectBuilder {
             q: format!("{} {}", "select", clms),
@@ -74,17 +66,21 @@ impl SelectDeleteBase for SelectBuilder {}
 
 impl SelectInsertBase for SelectBuilder {
     fn clmns(&self, columns: Vec<&str>) -> String {
-        let mut clms: String = "".to_string();
-        let cs = &columns;
-        for c in cs {
-            if cs.last() == Some(&c) {
-                clms = format!("{}{}", clms, c.to_string());
-                break;
-            }
-            clms = format!("{}{}, ", clms, c.to_string())
-        }
-        clms
+        assemble_columns_statemente(columns)
     }
+}
+
+fn assemble_columns_statemente(columns: Vec<&str>) -> String {
+    let mut clms: String = "".to_string();
+    let cs = &columns;
+    for c in cs {
+        if cs.last() == Some(&c) {
+            clms = format!("{}{}", clms, c.to_string());
+            break;
+        }
+        clms = format!("{}{}, ", clms, c.to_string())
+    }
+    clms
 }
 
 impl SelectUpdateDeleteBase for SelectBuilder {}
