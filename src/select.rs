@@ -39,14 +39,18 @@ impl SelectBuilder {
     }
 
     pub fn columns(mut self, columns: Vec<&str>) -> Self {
-        let exists_prev_clmn = self.q.split(" ").count();
-        if exists_prev_clmn >= 2 {
+        let q = &self.q;
+        if SelectBuilder::exists_prev_columns(q) {
             self.q = format!("{},", self.q);
         }
 
         let clms = self.clmns(columns);
         self.q = format!("{} {}", self.q, clms);
         self
+    }
+
+    fn exists_prev_columns(q: &String) -> bool {
+        q.split(" ").count() >= 2
     }
 
     pub fn from(mut self, table: &str) -> Self {
