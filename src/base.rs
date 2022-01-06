@@ -13,7 +13,7 @@ pub trait SelectDeleteBase : Base {
 }
 
 pub trait SelectInsertBase : Base {
-    fn clmns(&self, cs: Vec<&str>) -> String;
+    fn clmns(&self, cs: &[&str]) -> String;
 }
 
 pub trait SelectUpdateDeleteBase : Base {

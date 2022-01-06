@@ -13,8 +13,8 @@ impl SelectBuilder {
     ///
     /// ```
     /// let select_query =
-    ///     SelectBuilder::select(["col0", "col1"].to_vec())
-    ///         .columns(["col2", "col3"].to_vec())
+    ///     SelectBuilder::select(&["col0", "col1"])
+    ///         .columns(&["col2", "col3"])
     ///         .from("table1")
     ///         .wheres("id >= 100");
     /// assert_eq!(
@@ -22,7 +22,7 @@ impl SelectBuilder {
     ///     "select col0, col1, col2, col3 from table1 where id >= 100".to_string()
     /// );
     /// ```
-    pub fn select(columns: Vec<&str>) -> Self {
+    pub fn select(columns: &[&str]) -> Self {
         let clms = assemble_columns_statemente(columns);
 
         SelectBuilder {
@@ -30,7 +30,7 @@ impl SelectBuilder {
         }
     }
 
-    pub fn columns(mut self, columns: Vec<&str>) -> Self {
+    pub fn columns(mut self, columns: &[&str]) -> Self {
         let q = &self.q;
         if SelectBuilder::exists_prev_columns(q) {
             self.q = format!("{},", self.q);
@@ -65,16 +65,15 @@ impl Base for SelectBuilder {
 impl SelectDeleteBase for SelectBuilder {}
 
 impl SelectInsertBase for SelectBuilder {
-    fn clmns(&self, columns: Vec<&str>) -> String {
+    fn clmns(&self, columns: &[&str]) -> String {
         assemble_columns_statemente(columns)
     }
 }
 
-fn assemble_columns_statemente(columns: Vec<&str>) -> String {
+fn assemble_columns_statemente(columns: &[&str]) -> String {
     let mut clms: String = "".to_string();
-    let cs = &columns;
-    for c in cs {
-        if cs.last() == Some(&c) {
+    for c in columns {
+        if columns.last() == Some(&c) {
             clms = format!("{}{}", clms, c.to_string());
             break;
         }

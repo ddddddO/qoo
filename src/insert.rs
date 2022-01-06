@@ -15,7 +15,7 @@ impl InsertBuilder {
     /// ```
     /// let insert_query =
     ///     InsertBuilder::insert("test1")
-    ///         .columns(["col0", "col1"].to_vec())
+    ///         .columns(&["col0", "col1"])
     ///         .value("'xxx'")
     ///         .value("'yyy'");
     /// assert_eq!(
@@ -30,7 +30,7 @@ impl InsertBuilder {
         }
     }
 
-    pub fn columns(mut self, columns: Vec<&str>) -> Self {
+    pub fn columns(mut self, columns: &[&str]) -> Self {
         let clms = self.clmns(columns);
         self.q = format!("{} {} ", self.q, clms);
         self
@@ -55,11 +55,10 @@ impl Base for InsertBuilder {
 }
 
 impl SelectInsertBase for InsertBuilder {
-    fn clmns(&self, columns: Vec<&str>) -> String {
+    fn clmns(&self, columns: &[&str]) -> String {
         let mut clms: String = "(".to_string();
-        let cs = &columns;
-        for c in cs {
-            if cs.last() == Some(&c) {
+        for c in columns {
+            if columns.last() == Some(&c) {
                 clms = format!("{}{})", clms, c.to_string());
                 break;
             }

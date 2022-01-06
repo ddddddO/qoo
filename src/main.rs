@@ -6,8 +6,8 @@ use qoo::delete::*;
 
 fn main() {
     let select_query =
-        SelectBuilder::select(["col0", "col1"].to_vec())
-            .columns(["col2", "col3"].to_vec())
+        SelectBuilder::select(&["col0", "col1"])
+            .columns(&["col2", "col3"])
             .from("table1")
             .wheres("id >= 100");
     assert_eq!(
@@ -17,7 +17,7 @@ fn main() {
 
     let insert_query =
         InsertBuilder::insert("test1")
-            .columns(["col0", "col1"].to_vec())
+            .columns(&["col0", "col1"])
             .value("'xxx'")
             .value("'yyy'");
     assert_eq!(
