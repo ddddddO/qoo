@@ -12,6 +12,9 @@ impl SelectBuilder {
     /// # Examples
     ///
     /// ```
+    /// use qoo::base::*;
+    /// use qoo::select::*;
+    ///
     /// let select_query =
     ///     SelectBuilder::select(&["col0", "col1"])
     ///         .columns(&["col2", "col3"])

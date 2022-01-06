@@ -12,6 +12,9 @@ impl DeleteBuilder {
     /// # Examples
     ///
     /// ```
+    /// use qoo::base::*;
+    /// use qoo::delete::*;
+    ///
     /// let delete_query =
     ///     DeleteBuilder::delete()
     ///         .from("test1")

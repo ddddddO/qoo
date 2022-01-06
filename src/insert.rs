@@ -13,6 +13,9 @@ impl InsertBuilder {
     /// # Examples
     ///
     /// ```
+    /// use qoo::base::*;
+    /// use qoo::insert::*;
+    ///
     /// let insert_query =
     ///     InsertBuilder::insert("test1")
     ///         .columns(&["col0", "col1"])

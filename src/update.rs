@@ -13,6 +13,9 @@ impl UpdateBuilder {
     /// # Examples
     ///
     /// ```
+    /// use qoo::base::*;
+    /// use qoo::update::*;
+    ///
     /// let update_query =
     ///     UpdateBuilder::update("test1")
     ///         .set("col1='aaa'")
