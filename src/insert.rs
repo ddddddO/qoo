@@ -1,4 +1,5 @@
-use crate::base::{Base, SelectInsertBase};
+pub use crate::base::Base;
+use crate::base::SelectInsertBase;
 
 /// Structure for insert statement.
 pub struct InsertBuilder {
@@ -13,8 +14,7 @@ impl InsertBuilder {
     /// # Examples
     ///
     /// ```
-    /// use qoo::base::*;
-    /// use qoo::insert::*;
+    /// use qoo::insert::{InsertBuilder, Base};
     ///
     /// let insert_query =
     ///     InsertBuilder::insert("test1")

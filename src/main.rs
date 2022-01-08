@@ -1,8 +1,4 @@
-use qoo::base::*;
-use qoo::select::*;
-use qoo::insert::*;
-use qoo::update::*;
-use qoo::delete::*;
+use qoo::prelude::*;
 
 fn main() {
     let select_query =
@@ -12,7 +8,7 @@ fn main() {
             .wheres("id >= 100");
     assert_eq!(
         select_query.to_sql(),
-        "select col0, col1, col2, col3 from table1 where id >= 100".to_string()
+        "select col0, col1, col2, col3 from table1 where id >= 100"
     );
 
     let insert_query =
@@ -32,7 +28,7 @@ fn main() {
             .wheres("id >= 11");
     assert_eq!(
         update_query.to_sql(),
-        "update test1 set col1='aaa', col2='bbb' where id >= 11".to_string()
+        "update test1 set col1='aaa', col2='bbb' where id >= 11"
     );
 
     let delete_query =
@@ -41,6 +37,6 @@ fn main() {
             .wheres("id >= 100");
     assert_eq!(
         delete_query.to_sql(),
-        "delete from test1 where id >= 100".to_string()
+        "delete from test1 where id >= 100"
     );
 }

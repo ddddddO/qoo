@@ -1,4 +1,5 @@
-use crate::base::{Base, SelectDeleteBase, SelectInsertBase, SelectUpdateDeleteBase};
+pub use crate::base::Base;
+use crate::base::{SelectDeleteBase, SelectInsertBase, SelectUpdateDeleteBase};
 
 /// Structure for select statement.
 pub struct SelectBuilder {
@@ -12,8 +13,7 @@ impl SelectBuilder {
     /// # Examples
     ///
     /// ```
-    /// use qoo::base::*;
-    /// use qoo::select::*;
+    /// use qoo::select::{SelectBuilder, Base};
     ///
     /// let select_query =
     ///     SelectBuilder::select(&["col0", "col1"])
@@ -22,7 +22,7 @@ impl SelectBuilder {
     ///         .wheres("id >= 100");
     /// assert_eq!(
     ///     select_query.to_sql(),
-    ///     "select col0, col1, col2, col3 from table1 where id >= 100".to_string()
+    ///     "select col0, col1, col2, col3 from table1 where id >= 100"
     /// );
     /// ```
     pub fn select(columns: &[&str]) -> Self {

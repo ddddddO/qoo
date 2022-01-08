@@ -1,4 +1,5 @@
-use crate::base::{Base, SelectDeleteBase, SelectUpdateDeleteBase};
+pub use crate::base::Base;
+use crate::base::{SelectDeleteBase, SelectUpdateDeleteBase};
 
 /// Structure for delete statement.
 pub struct DeleteBuilder {
@@ -12,8 +13,7 @@ impl DeleteBuilder {
     /// # Examples
     ///
     /// ```
-    /// use qoo::base::*;
-    /// use qoo::delete::*;
+    /// use qoo::delete::{DeleteBuilder, Base};
     ///
     /// let delete_query =
     ///     DeleteBuilder::delete()
@@ -21,7 +21,7 @@ impl DeleteBuilder {
     ///         .wheres("id >= 100");
     /// assert_eq!(
     ///     delete_query.to_sql(),
-    ///     "delete from test1 where id >= 100".to_string()
+    ///     "delete from test1 where id >= 100"
     /// );
     /// ```
     pub fn delete() -> DeleteBuilder {

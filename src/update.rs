@@ -1,4 +1,5 @@
-use crate::base::{Base, SelectUpdateDeleteBase};
+pub use crate::base::Base;
+use crate::base::SelectUpdateDeleteBase;
 
 /// Structure for update statement.
 pub struct UpdateBuilder {
@@ -13,8 +14,7 @@ impl UpdateBuilder {
     /// # Examples
     ///
     /// ```
-    /// use qoo::base::*;
-    /// use qoo::update::*;
+    /// use qoo::update::{UpdateBuilder, Base};
     ///
     /// let update_query =
     ///     UpdateBuilder::update("test1")
@@ -23,7 +23,7 @@ impl UpdateBuilder {
     ///         .wheres("id >= 11");
     /// assert_eq!(
     ///     update_query.to_sql(),
-    ///     "update test1 set col1='aaa', col2='bbb' where id >= 11".to_string()
+    ///     "update test1 set col1='aaa', col2='bbb' where id >= 11"
     /// );
     /// ```
     pub fn update(table: &str) -> Self {
